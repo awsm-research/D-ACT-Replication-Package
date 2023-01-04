@@ -8,7 +8,7 @@ In the main folder of the replication package, run the command below in terminal
 
   
 
-conda env create -f requirement.yml
+	conda env create -f requirement.yml
 
   
 
