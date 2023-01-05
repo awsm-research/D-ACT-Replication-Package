@@ -8,7 +8,7 @@ In the main folder of the replication package, run the command below in terminal
 
   
 
-conda env create -f requirement.yml
+	conda env create -f requirement.yml
 
   
 
@@ -34,35 +34,66 @@ However, you can generate the predictions yourself by follow the steps in the be
 The fine-tuned models of all approaches (i.e., D-ACT, TufanoT5 and AutoTransform) can be obtained from this google drive: https://drive.google.com/file/d/14MQCF5YUYX1vH2iuUf_RJX9QFtaNtQec/view?usp=sharing
 
 To use the fine-tuned models to generate predictions, follow the below steps
-1. Put the obtained fine-tuned models in the 'supplementary-material' directory
 
-    - D-ACT
-        - Put the directories 'model' to the corresponding directories of `supplementary-material`
+- D-ACT
+	- Put the directories 'model' to the corresponding directories of `./D-ACT/`
 
-        - For example, the directory `models-for-D-ACT-papers/D-ACT/output/android/model-time-wise-with-token-level-code-diff-info/model` should be put in `supplementary-material-for-D-ACT-papers/D-ACT/output/android/model-time-wise-with-token-level-code-diff-info/`
+	- For example, the directory `models-for-D-ACT-papers/D-ACT/output/android/model-time-wise-with-token-level-code-diff-info/model` should be put in `D-ACT/output/android/model-time-wise-with-token-level-code-diff-info/`
 
-    - TufanoT5
-        - Put the directories beginning with `pytorch_dump` in the directory `supplementary-material-for-D-ACT-papers/baseline/TufanoT5`
+- AutoTransform
+	- Put the directories beginning with `model` in the directory `./baseline/AutoTransform`
 
-        - Put the directories `model` to the corresponding directories of `supplementary-material`
 
-        - For example, the directory `models-for-D-ACT-papers/baseline/TufanoT5/from-pytorch/output/android/T5_with_token_level_code_diff_info_time_wise/model` should be put in `supplementary-material-for-D-ACT-papers/baseline/TufanoT5/from-pytorch/output/android/T5_with_token_level_code_diff_info_time_wise/`
+- TufanoT5
+	- Put the directories beginning with `pytorch_dump` in the directory `./baseline/TufanoT5`
 
-    - AutoTransform
-        - Put the directories beginning with `model` in the directory `supplementary-material-for-D-ACT-papers/baseline/AutoTransform`
-    
+	- Put the directories `model` to the corresponding directories of  `./baseline/TufanoT5`
+
+	- For example, the directory `models-for-D-ACT-papers/baseline/TufanoT5/from-pytorch/output/android/T5_with_token_level_code_diff_info_time_wise/model` should be put in `./baseline/TufanoT5/from-pytorch/output/android/T5_with_token_level_code_diff_info_time_wise/`
+
 2. Follow the instructions below
 
 ### Using Source Code of Our D-ACT
 
- 
+**Steps to train D-ACT**
+
+To train D-ACT model, please run follow the below steps:
+
+1. Go to directory `D-ACT`
+
+2. Run the below script
+
+	<br/>
+
+	For RQ1: 
+
+		bash train-model.sh <PROJECT> <MODEL_TYPE>
+	
+
+	where `<PROJECT>` is android, google or ovirt; `<MODEL_TYPE>` is CodeT5; 
+
+	<br/>
+
+	For RQ2 (with code diff):
+
+		bash train-model.sh <PROJECT> <MODEL_TYPE>
+
+	where `<MODEL_TYPE>` is CodeBERT, GraphCodeBERT or PLBART
+
+	<br/>
+	
+	For RQ2 (without code diff):
+
+		bash train-model-without-code-diff.sh <PROJECT> <MODEL_TYPE>
+
+	where `<MODEL_TYPE>` is CodeT5
+
+
 **Steps to generate prediction**
 
-  
 
 To generate the prediction from D-ACT for RQ1, please follow the below steps:
 
-  
 
 1. Go to directory `D-ACT`
 
@@ -74,7 +105,7 @@ To generate the prediction from D-ACT for RQ1, please follow the below steps:
 
   
 
-where `<PROJECT>` is android, google or ovirt; `<MODEL_TYPE>` is CodeT5; `<CKPT>` is the number of train steps; `<BEAM_SIZE>` is the beam size
+where `<MODEL_TYPE>` is CodeT5; `<CKPT>` is the number of train steps; `<BEAM_SIZE>` is the beam size
 
   
 
@@ -85,6 +116,8 @@ To generate the prediction from D-ACT for RQ2, please follow the below steps:
 1. Go to directory `D-ACT`
 
 2. Run the below script
+
+	<br/>
 
 	2.1 get prediction with code diff information
 
@@ -126,7 +159,7 @@ Run the script for generating prediction by using the following checkpoints (the
 
   
 
-- Train steps for RQ3 (with code diff information)
+- Train steps for RQ2 (with code diff information)
 
 	| **Project** | **CodeBERT** | **GraphCodeBERT** | **PLBART** |
 	|:-----------:|:---------------:|:-------------:|:------------------------:|
@@ -136,7 +169,7 @@ Run the script for generating prediction by using the following checkpoints (the
 
   
 
-- Train steps for RQ3 (without code diff information)
+- Train steps for RQ2 (without code diff information)
 
   
 
@@ -150,11 +183,10 @@ Run the script for generating prediction by using the following checkpoints (the
 
 **How to get evaluation result**
 
-  
 
 1. Go to directory `D-ACT`
 
-2. Run the below script (you can run in an interactive mode): `get_perfect_match.py`
+2. Run the following script (you can run in an interactive mode): `get_perfect_match.py`
 
   
   
@@ -220,24 +252,53 @@ To create binary files of the datasets for RQ2, please follow the below steps:
 
 	The tokenized dataset is stored in BPE-2000-time-wise-with-code-diff-representation. After the dataset is tokenized, the script will call generate_binary_data.py to create binary files from the tokenized dataset. The generated binary files are stored in binary-data-time-wise-with-code-diff-representation.
 
+**Steps to train AutoTransform**
 
-**Steps to generate prediction**
-
-  
-
-To generate the prediction from AutoTransform for RQ1, please follow the below steps:
-
-  
+To train AutoTransform for RQ1, please follow the below steps:
 
 1. Go to directory `baseline/AutoTransform/scripts`
 
 2. Run the below script
 
+	<br/>
+
+	Train model for the time-ignore scenario
+
+		bash train-model.sh binary-data-random-split/<PROJECT> ../model-random-split/<PROJECT>
+		
+	Train model for the time-wise scenario
+
+		bash train-model.sh ../binary-data-time-wise/<PROJECT> ../model-time-wise/<PROJECT> 
+		
+	where `<PROJECT>` is android, google or ovirt
+
+
+To train AutoTransform for RQ2, please follow the below steps:
+
+1. Go to directory `baseline/AutoTransform/scripts-with-token-level-code-diff-info`
+
+2. Run the below script
+
+		bash train_model.sh ../binary-data-time-wise-with-single-diff/<PROJECT> ../model-time-wise-with-single-diff/<PROJECT>
+
+	where `<PROJECT>` is android, google or ovirt
+
+
+**Steps to generate prediction**
+
+  
+To generate the prediction from AutoTransform for RQ1, please follow the below steps:
+
+
+1. Go to directory `baseline/AutoTransform/scripts`
+
+2. Run the below script
+
+	<br/>
+
 	2.1 Time-ignore evaluation
 
 		bash call_inference_random_split.sh <PROJECT> <TRAIN_STEP>
-
-  
 
 	where `<PROJECT>` is android, google or ovirt; and `<TRAIN_STEP>` is the number of checkpoint of the model.
 
@@ -245,29 +306,17 @@ To generate the prediction from AutoTransform for RQ1, please follow the below s
 
 	2.2 Time-wise evaluation
 
-  
-
 		bash call_inference_time_wise.sh <PROJECT> <TRAIN_STEP>
 
-  
-
 To generate the prediction from AutoTransform for RQ2, please follow the below steps:
-
-  
 
 1. Go to directory `baseline/AutoTransform/scripts-with-token-level-code-diff-info`
 
 2. Run the below script
 
-  
-
 		bash call_inference.sh <PROJECT> <TRAIN_STEP>
 
-  
-
 **How to reproduce the experiment result**
-
-  
 
 Run the script for generating prediction by using the following checkpoints (the fine-tuned models are already provided).
 
@@ -280,39 +329,86 @@ Run the script for generating prediction by using the following checkpoints (the
 | Ovirt | 22,000 | 17,000 | 22,000 |
 
   
-  
-
 **How to get evaluation result**
 
-  
 
 1. Go to directory `baseline/AutoTransform/`
 2. Run the below script (you can run in an interactive mode): `get_perfect_match.py`
 
   
-
 #### TufanoT5
 
   
-
 TufanoT5 is implemented in the [t5](https://github.com/google-research/text-to-text-transfer-transformer) library.
+
+
+**Steps to train TufanoT5**
+
+Before training TufanoT5, please obtain  the pre-trained model from ... . Then, place it in `baseline/TufanoT5/model_dump/pre-training/`. The directory should contain the following files:
+
+- checkpoint
+- model.ckpt-200000.data-00001-of-00002
+- model.ckpt-200000.meta
+- model.ckpt-200000.data-00000-of-00002  
+- model.ckpt-200000.index                
+- operative_config.gin
+
+
+To train TufanoT5 for RQ1, please follow the below steps:
+
+1. Go to directory `baseline/TufanoT5`
+
+2. Run the below script to train model
+
+	<br/>
+
+		bash train-model-time-ignore.sh <PROJECT>
+		
+		bash train-model-time-wise.sh <PROJECT>
+
+	where `<PROJECT>` is android, google or ovirt.
+
+	<br/>
+
+3. Run the below script to calculate validation loss
+
+	<br/>
+
+	For time-ignore models
+
+		bash convert_tf_to_pytorch_time_ignore.sh <PROJECT>
+
+		bash calculate_val_loss_time_ignore.sh <PROJECT>
+
+	For time-wise models
+
+		bash convert_tf_to_pytorch_time_wise.sh <PROJECT>
+
+		bash calculate_val_loss_time_wise.sh <PROJECT>
+
+
+To train TufanoT5 for RQ2, please follow the below steps:
+
+1. Go to directory `baseline/TufanoT5`
+
+2. Run the below script
+
+		bash train-model-with-code-diff.sh <PROJECT>
+
 
 **Steps to generate prediction**
 
-  
-
 To generate the prediction from TufanoT5 for RQ1, please follow the below steps:
 
-  
 
 1. Go to directory `baseline/TufanoT5`
 3. Run the below script
 
+	<br/>
+
 	2.1 Time-ignore evaluation
 
 		bash generate_prediction_for_test_time_ignore.sh <PROJECT> <TRAIN_STEP>
-
-  
 
 	where `<PROJECT>` is android, google or ovirt; and `<TRAIN_STEP>` is the number of checkpoint of the model.
 
@@ -320,33 +416,20 @@ To generate the prediction from TufanoT5 for RQ1, please follow the below steps:
 
 	2.2 Time-wise evaluation
 
-  
-
 		bash generate_prediction_for_test_time_wise.sh <PROJECT> <TRAIN_STEP>
 
-  
-
 To generate the prediction from TufanoT5 for RQ2, please follow the below steps:
-
-  
 
 1. Go to directory `baseline/TufanoT5`
 
 2. Run the below script
 
-  
-
 		bash generate-prediction-with-code-diff.sh <PROJECT> <TRAIN_STEP>
-
-  
 
 **How to reproduce the experiment result**
 
-  
-
 Run the script for generating prediction by using the following checkpoints (the fine-tuned models are already provided).
 
-  
 
 | **Project** | **Time-ignore** | **Time-wise** | **Train with code diff** |
 |:-----------:|:---------------:|:-------------:|:------------------------:|
@@ -355,11 +438,8 @@ Run the script for generating prediction by using the following checkpoints (the
 | Ovirt | 16,000 | 34,000 | 114,000 |
 
   
-
 **How to get evaluation result**
 
-  
-
-1. Go to directory `baseline/TufanoT5/`
+1. Go to directory `./baseline/TufanoT5/`
 
 2. Run the below script (you can run in an interactive mode): `get_perfect_match.py`
