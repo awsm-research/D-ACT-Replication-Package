@@ -1,7 +1,7 @@
 PROJ_NAME=$1 # android, google, ovirt
 
-MODEL_DIR=./model_dump/fine-tuning_with_pre-training-random-split/$PROJ_NAME/
-PYTORCH_DIR=./pytorch_dump-random-split/$PROJ_NAME/
+MODEL_DIR=./model_dump/fine-tuning_with_pre-training-time-ignore/$PROJ_NAME/
+PYTORCH_DIR=./pytorch_dump-time-ignore/$PROJ_NAME/
 
 
 for ((step=202000;step<=500000;step+=2000)); do

@@ -225,9 +225,9 @@ where `<PROJECT>` is android, google or ovirt
 
   
 
-The script will call subword_toknize.sh to tokenize the datasets by using BPE subword tokenization (for more info, please refer to [this Github](https://github.com/rsennrich/subword-nmt)). The tokenized dataset is stored in BPE-2000-random-split (for time-ignore evaluation) and BPE-2000-time-wise (for time-wise evaluation).
+The script will call subword_toknize.sh to tokenize the datasets by using BPE subword tokenization (for more info, please refer to [this Github](https://github.com/rsennrich/subword-nmt)). The tokenized dataset is stored in BPE-2000-time-ignore (for time-ignore evaluation) and BPE-2000-time-wise (for time-wise evaluation).
 
-After the dataset is tokenized, the script will call generate_binary_data.py to create binary files from the tokenized dataset. The generated binary files are stored in binary-data-random-split (for time-ignore evaluation) and binary-data-time-wise (for time-wise evaluation) .
+After the dataset is tokenized, the script will call generate_binary_data.py to create binary files from the tokenized dataset. The generated binary files are stored in binary-data-time-ignore (for time-ignore evaluation) and binary-data-time-wise (for time-wise evaluation) .
 
   
   
@@ -264,7 +264,7 @@ To train AutoTransform for RQ1, please follow the below steps:
 
 	Train model for the time-ignore scenario
 
-		bash train-model.sh binary-data-random-split/<PROJECT> ../model-random-split/<PROJECT>
+		bash train-model.sh binary-data-time-ignore/<PROJECT> ../model-time-ignore/<PROJECT>
 		
 	Train model for the time-wise scenario
 

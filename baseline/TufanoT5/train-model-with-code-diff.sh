@@ -1,6 +1,6 @@
 PROJECT=$1
 
-BASE_DATA_DIR=../../dataset-complete/final-dataset-no-space-special-chars-latest-version-time-wise/$PROJECT
+BASE_DATA_DIR=../../dataset-complete/dataset-time-wise/$PROJECT
 
 EXP_NAME=T5_with_token_level_code_diff_info_time_wise
 

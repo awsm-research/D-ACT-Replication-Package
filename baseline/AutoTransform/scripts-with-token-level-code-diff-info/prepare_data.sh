@@ -1,6 +1,6 @@
 PROJECT=android #android, google, ovirt
 
-BASE_DATA_DIR=../../../dataset/final-dataset-no-space-special-chars-latest-version-time-wise
+BASE_DATA_DIR=../../../dataset/dataset-time-wise
 SAVE_DIR=../BPE-2000-time-wise-with-code-diff-representation
 BIN_DATA_DIR=../binary-data-time-wise-with-code-diff-representation
 

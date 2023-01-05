@@ -140,16 +140,16 @@ def get_prediction(proj_name, base_prediction_dir, file_suffix):
 
 def get_result_RQ1_time_ignore():
     global base_data_dir
-    base_data_dir = '../../dataset/final-dataset-no-space-special-chars-latest-version-random-split/'
+    base_data_dir = '../../dataset/dataset-time-ignore'
     
     print('RQ1 time-ignore')
     for proj in proj_names:
-        base_prediction_dir = './prediction-random-split/'+proj+'/final_prediction/'
+        base_prediction_dir = './prediction-time-ignore/'+proj+'/final_prediction/'
         get_prediction(proj,base_prediction_dir,'prediction_beam_')
 
 def get_result_RQ1_time_wise():
     global base_data_dir
-    base_data_dir = '../../dataset/final-dataset-no-space-special-chars-latest-version-time-wise/'
+    base_data_dir = '../../dataset/dataset-time-wise/'
 
     print()
     print('RQ1 time-wise')
@@ -163,7 +163,7 @@ def get_result_RQ1_time_wise():
 def get_result_RQ2():
     global base_data_dir
     
-    base_data_dir = '../../dataset/final-dataset-no-space-special-chars-latest-version-time-wise/'
+    base_data_dir = '../../dataset/dataset-time-wise/'
 
     print()
     print('RQ2: time-wise with token-level code diff information')

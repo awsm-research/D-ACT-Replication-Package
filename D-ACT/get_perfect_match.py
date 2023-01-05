@@ -7,7 +7,7 @@ import javalang
 
 exp_name = ''
 
-base_data_dir = '../dataset/final-dataset-no-space-special-chars-latest-version-time-wise/'
+base_data_dir = '../dataset/dataset-time-wise/'
 
 
 def tokenize_java(code):

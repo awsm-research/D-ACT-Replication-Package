@@ -152,8 +152,8 @@ def get_prediction(proj_name, train_step):
 
 def get_result_RQ1_time_ignore():
     global prediction_dir, base_data_dir
-    prediction_dir = './prediction-random-split/'
-    base_data_dir = '../../dataset/final-dataset-no-space-special-chars-latest-version-random-split/'
+    prediction_dir = './prediction-time-ignore/'
+    base_data_dir = '../../dataset/dataset-time-ignore/'
 
     print('RQ1 time-ignore')
     get_prediction('google', 23000)
@@ -163,7 +163,7 @@ def get_result_RQ1_time_ignore():
 def get_result_RQ1_time_wise():
     global prediction_dir, base_data_dir
     prediction_dir = './prediction-time-wise/'
-    base_data_dir = '../../dataset/final-dataset-no-space-special-chars-latest-version-time-wise/'
+    base_data_dir = '../../dataset/dataset-time-wise/'
 
     print()
     print('RQ1 time-wise')
@@ -174,7 +174,7 @@ def get_result_RQ1_time_wise():
 def get_result_RQ2():
     global prediction_dir, base_data_dir
     prediction_dir = './prediction-time-wise-with-token-level-code-diff-info/'
-    base_data_dir = '../../dataset/final-dataset-no-space-special-chars-latest-version-time-wise/'
+    base_data_dir = '../../dataset/dataset-time-wise/'
 
     print()
     print('RQ2: time-wise with token-level code diff information')
