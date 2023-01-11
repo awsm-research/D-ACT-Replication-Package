@@ -6,8 +6,6 @@
 
 In the main folder of the replication package, run the command below in terminal to install the required libraries (the libraries are for conda environment)
 
-  
-
 	conda env create -f requirement.yml
 
   
@@ -31,7 +29,7 @@ However, you can generate the predictions yourself by follow the steps in the be
 
 ### Obtaining the fine-tuned models
 
-The fine-tuned models of all approaches (i.e., D-ACT, TufanoT5 and AutoTransform) can be obtained from this google drive: https://drive.google.com/file/d/14MQCF5YUYX1vH2iuUf_RJX9QFtaNtQec/view?usp=sharing
+The fine-tuned models of all approaches (i.e., D-ACT, AutoTransform and TufanoT5) can be obtained from this zenodo: https://doi.org/10.5281/zenodo.7508436
 
 To use the fine-tuned models to generate predictions, follow the below steps
 
@@ -298,7 +296,7 @@ To generate the prediction from AutoTransform for RQ1, please follow the below s
 
 	2.1 Time-ignore evaluation
 
-		bash call_inference_random_split.sh <PROJECT> <TRAIN_STEP>
+		bash call_inference_time_ignore.sh <PROJECT> <TRAIN_STEP>
 
 	where `<PROJECT>` is android, google or ovirt; and `<TRAIN_STEP>` is the number of checkpoint of the model.
 
@@ -344,7 +342,7 @@ TufanoT5 is implemented in the [t5](https://github.com/google-research/text-to-t
 
 **Steps to train TufanoT5**
 
-Before training TufanoT5, please obtain  the pre-trained model from ... . Then, place it in `baseline/TufanoT5/model_dump/pre-training/`. The directory should contain the following files:
+Before training TufanoT5, please obtain  the pre-trained model from `TufanoT5-pre-trained-model.zip` . Then, place it in `baseline/TufanoT5/model_dump/pre-training/`. The directory should contain the following files:
 
 - checkpoint
 - model.ckpt-200000.data-00001-of-00002
